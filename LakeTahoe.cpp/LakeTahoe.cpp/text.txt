@@ -1,0 +1,101 @@
+//This function receives the file name and a 2D array of elevation data. It opens the file and reads the data from the file into the 2D array. It should confirm that the first two values are 420 and 210, respectively, since if they are not, then the 2D array will not be correct
+bool readTahoeData(char* filename, float lake[420][210])
+{
+    //check if the file is imputted and check if file exist
+    ifstream fin (filename);
+    //check if the file was succussesfully opened or if it even exists.
+    if (fin.fail())
+    {
+        cerr << "Error: file not open.\n";
+        return false;
+    }
+    //store one data into an char array to convert later.
+    char array[10] ={0};
+    //Keep track of the placement of the array.
+    int numberwhat=0;
+    int position =0;
+    
+    
+    //Get everysingle character
+    while (!fin.eof())
+    {
+        char c = fin.get();
+        char d= fin.peek();
+        //int place=0;
+        //int place2=0;
+        //If a number, store into the array
+        if(numberwhat<=1)
+        {
+            if (numberwhat==0)
+            {
+                if((c > '/' && c < ':') || (c == '.') || (c == '-' || c=='+'))
+                {
+                    array[position]=c;
+                    position++;
+                }
+                else
+                {
+                    //if the next chararcter in the word is a number then increment to the next number.
+                    if((d > '/' && d < ':') || (d == '.') || (d == '-' || d=='+'))
+                    {
+                        numberwhat++;
+                        position=0;
+                        float rows =atof(array);
+                        cout << rows << endl;
+                        char array[10] ={0};
+                    }
+                }
+            }
+            else if (numberwhat==1)
+            {
+                if((c > '/' && c < ':') || (c == '.') || (c == '-' || c=='+'))
+                {
+                    array[position]=c;
+                    position++;
+                }
+                else
+                {
+                    //if the next chararcter in the word is a number then increment to the next number.
+                    if((d > '/' && d < ':') || (d == '.') || (d == '-' || d=='+'))
+                    {
+                        numberwhat++;
+                        position=0;
+                        float colums =0;
+                        colums= atof (array);
+                        cout << colums << endl;
+                        char array[10] ={0};
+                    }
+                }
+            }
+        }
+        /*
+        else
+        {
+            if ((c > '/' && c < ':') || (c == '.') || (c == '-' || c=='+'))
+            {
+                array[place]=c;
+                position++;
+            }
+            //if not:
+            else
+            {
+                //if the next chararcter in the word is a number then increment to the next number.
+                if((d > '/' && d < ':') || (d == '.') || (d == '-' || d=='+'))
+                {
+                    position2++;
+                }
+            }
+
+        }
+    }
+    
+   
+    //now if the two first numbers are 420 and 210 then proceed, if not return error.
+    
+    //now convert all the char numbers into floats through atof
+    
+    */
+    }
+    return true;
+}
+
